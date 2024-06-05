@@ -1,0 +1,53 @@
+@charset "utf-8";
+@media screen and (min-width: 1041px) and (max-width: 3000px){
+.header {
+	float: left;
+	height: auto;
+	width: 100%;
+}
+.logo {
+	float: left;
+	height: auto;
+	width: 20%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	margin-left: 3%;
+}
+.logo img {
+	height: auto;
+	width: 50%;
+}
+
+
+.box-menu {
+	float: left;
+	height: auto;
+	width: 60%;
+	margin-top: 3.5%;
+	margin-left: 2%;
+}
+.contact-top {
+	text-align: right;
+	float: right;
+	width: 10%;
+	height: auto;
+	margin-top: 3%;
+	margin-right: 3%;
+}
+.contact-top img {
+	height: auto;
+	width: 20%;
+	margin-left: 10%;
+}
+.banner {
+	float: left;
+	height: auto;
+	width: 100%;
+}
+.banner-m {
+	float: left;
+	height: auto;
+	width: 100%;
+	display: none;
+}
+}

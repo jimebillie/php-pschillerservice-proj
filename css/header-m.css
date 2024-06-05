@@ -1,0 +1,58 @@
+@charset "utf-8";
+@media screen and (max-width: 480px) {
+.header {
+	float: left;
+	height: auto;
+	width: 100%;
+}
+.logo {
+	float: left;
+	height: auto;
+	width: 100%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+	text-align: center;
+}
+.logo img {
+	height: auto;
+	width: 30%;
+}
+
+
+.box-menu {
+	float: left;
+	height: auto;
+	width: 60%;
+	margin-top: 3.5%;
+	margin-left: 2%;
+	margin-bottom: 2%;
+	position: relative;
+	visibility: visible;
+	z-index: 99999;
+}
+.contact-top {
+	text-align: right;
+	float: right;
+	width: 30%;
+	height: auto;
+	margin-top: 3%;
+	margin-right: 3%;
+}
+.contact-top img {
+	height: auto;
+	width: 20%;
+	margin-left: 10%;
+}
+.banner {
+	float: left;
+	height: auto;
+	width: 100%;
+	display: none;
+}
+
+.banner-m {
+	float: left;
+	height: auto;
+	width: 100%;
+}
+}
