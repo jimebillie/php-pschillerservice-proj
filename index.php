@@ -114,7 +114,21 @@ $db = new connect();
 	<div class="content">
 		<div class="left-01">
 			<div class="box-main">
-				<div class="picture-about-home"><img src="images/picture-about-home.jpg" width="465" height="700" /></div>
+				<div class="picture-about-home">
+					<?php
+					$db_aboutus_image_home = "";
+					try {
+						$stmt = $db->conn->prepare("SELECT * FROM `aboutus_image_home`");
+						$stmt->execute();
+						foreach ($stmt->fetchAll() as $row) {
+							$db_aboutus_image_home = $row["img"];
+						}
+					} catch (Exception $e) {
+						echo $e->getMessage();
+					}
+					?>
+					<img src="back-office/images/aboutus/<?= $db_aboutus_image_home ?>" width="465" height="700" />
+				</div>
 				<div class="title-about-home">P.S CHILLER SERVICE</div>
 				<div class="sub-about-home">
 					<?php
@@ -214,25 +228,27 @@ $db = new connect();
 
 						<?php
 						try {
-							$stmt2 = $db->conn->prepare("SELECT *
-									FROM (
-										SELECT *, 
-											   ROW_NUMBER() OVER (PARTITION BY id_main ORDER BY id_main) as row_num
-										FROM portfolio_sub 
-									) as sub
-									WHERE sub.row_num <= 2");
+							$stmt2 = $db->conn->prepare("SELECT * FROM `portfolio` ORDER BY `id` DESC LIMIT 5");
 							$stmt2->execute();
-							foreach ($stmt2->fetchAll() as $row) {
+							foreach ($stmt2->fetchAll() as $row1) {
+								try {
+									$stmt2 = $db->conn->prepare("SELECT * FROM `portfolio_sub` WHERE `id_main`=:__id_main ORDER BY `id` DESC LIMIT 2");
+									$stmt2->execute(["__id_main" => $row1["id"]]);
+									foreach ($stmt2->fetchAll() as $row2) {
 						?>
-								<li>
-									<div class="box-port">
-										<div class="picture-port"><a href="portfolio-list-detail.php?id_main=<?= $row["id_main"] ?>&id=<?= $row["id"] ?>"><img src="back-office/images/portfolio/<?= $row["image"] ?>" width="400" height="267" /></a></div>
-										<div class="title-port"><a href="portfolio-list-detail.php?id_main=<?= $row["id_main"] ?>&id=<?= $row["id"] ?>"><?= $row["name"] ?></a></div>
+										<li>
+											<div class="box-port">
+												<div class="picture-port"><a href="portfolio-list-detail.php?id_main=<?= $row2["id_main"] ?>&id=<?= $row2["id"] ?>"><img src="back-office/images/portfolio/<?= $row2["image"] ?>" width="400" height="267" /></a></div>
+												<div class="title-port"><a href="portfolio-list-detail.php?id_main=<?= $row2["id_main"] ?>&id=<?= $row2["id"] ?>"><?= $row2["name"] ?></a></div>
 
-										<div class="more-04"><a href="portfolio-list-detail.php?id_main=<?= $row["id_main"] ?>&id=<?= $row["id"] ?>">ดูเพิ่มเติม > </a></div>
-									</div>
-								</li>
+												<div class="more-04"><a href="portfolio-list-detail.php?id_main=<?= $row2["id_main"] ?>&id=<?= $row2["id"] ?>">ดูเพิ่มเติม > </a></div>
+											</div>
+										</li>
 						<?php
+									}
+								} catch (Exception $e) {
+									echo $e->getMessage();
+								}
 							}
 						} catch (Exception $e) {
 							echo $e->getMessage();
@@ -250,7 +266,7 @@ $db = new connect();
 				<div class="title-all">จำหน่ายอะไหล่</div>
 				<?php
 				try {
-					$stmt = $db->conn->prepare("SELECT * FROM `spare_parts`");
+					$stmt = $db->conn->prepare("SELECT * FROM `spare_parts` LIMIT 4");
 					$stmt->execute();
 					foreach ($stmt->fetchAll() as $row) {
 				?>

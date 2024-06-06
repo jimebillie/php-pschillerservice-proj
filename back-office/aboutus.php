@@ -100,7 +100,63 @@ $db = new connect();
             <div class="mb-5">
                 <div class="mb-2">
                     <b class="text-2xl">
-                        - เพิ่มรูปภาพหลัก : เกี่ยวกับเรา
+                        - เพิ่มรูปภาพ : แสดงที่หน้าแรก
+                    </b>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <?php
+                        $db_aboutus_image_home = "";
+                        try {
+                            $stmt = $db->conn->prepare("SELECT * FROM `aboutus_image_home`");
+                            $stmt->execute();
+                            foreach ($stmt->fetchAll() as $row) {
+                                $db_aboutus_image_home = $row["img"];
+                            }
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                        }
+                        ?>
+                        <form action="sys_aboutus/aboutus_image_home.php" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-12 col-md-6">
+                                    <?php
+                                    if ($db_aboutus_image_home !== "") {
+                                    ?>
+                                        <div class="mb-3 w-[300px]">
+                                            <img class="w-full border-[1px] border-zinc-300 cursor-pointer" src="<?= "images/aboutus/" . $db_aboutus_image_home ?>" alt="aboutus" billie-gallery="aboutus">
+                                        </div>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="mb-3 text-zinc-400">
+                                            ยังไม่มีรูปภาพ
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                    <label for="aboutus_image">
+                                        รูปภาพ :
+                                    </label>
+                                    <input class="form-control" type="file" name="aboutus_image" id="aboutus_image" required>
+                                </div>
+                                <div class="col-12 mt-3">
+                                    <button class="btn btn-primary" type="submit">
+                                        อัพเดท
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <div class="mb-2">
+                    <b class="text-2xl">
+                        - เพิ่มรูปภาพ : แสดงที่หน้าเกี่ยวกับเรา
                     </b>
                 </div>
                 <div class="card">

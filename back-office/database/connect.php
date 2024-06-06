@@ -17,7 +17,7 @@ class connect
     public function __construct()
     {
         try {
-            $conn = new PDO("mysql:host=$this->servername;dbname=$this->db_name", $this->username, $this->password);
+            $conn = new PDO("mysql:host=$this->servername;dbname=$this->db_name;charset=utf8", $this->username, $this->password);
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             date_default_timezone_set('Asia/Bangkok');
