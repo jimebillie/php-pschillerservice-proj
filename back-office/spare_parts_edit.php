@@ -18,6 +18,7 @@ if (!isset($_GET["id"]) || $_GET["id"] == "") {
 $db_spare_parts_name = "";
 $db_spare_parts_image = "";
 $db_spare_parts_id = "";
+$db_spare_parts_link = "";
 try {
     $stmt = $db->conn->prepare("SELECT * FROM `spare_parts` where `id` = :_id");
     $stmt->execute(["_id" => $_GET["id"]]);
@@ -25,6 +26,7 @@ try {
         $db_spare_parts_name = $row["name"];
         $db_spare_parts_image = $row["image"];
         $db_spare_parts_id = $row["id"];
+        $db_spare_parts_link = $row["link_for_sale"];
     }
 } catch (Exception $e) {
     echo $e->getMessage();
@@ -150,6 +152,13 @@ if ($db_spare_parts_id === "") {
                                             ชื่ออะไหล่ :
                                         </label>
                                         <input class="form-control ml-2" type="text" name="name" id="name" value="<?= $db_spare_parts_name ?>" required>
+                                    </div>
+                                    <div class="col-12 my-2"></div>
+                                    <div class="col-12 col-md-6 flex items-center text-nowrap">
+                                        <label for="">
+                                            ลิงก์สำหรับขาย :
+                                        </label>
+                                        <input class="form-control ml-2" type="text" name="link_for_sale" id="" value="<?= $db_spare_parts_link ?>" required>
                                     </div>
                                     <div class="col-12 my-2"></div>
                                     <div class="col-12 col-md-6">

@@ -43,6 +43,11 @@ try {
             $mail->addAttachment($_FILES["file_send"]["tmp_name"], $_FILES["file_send"]["name"]);         //Add attachments
         }
     }
+    if (isset($_FILES["file_send2"])) {
+        if($_FILES["file_send2"]["name"] !== ""){
+            $mail->addAttachment($_FILES["file_send2"]["tmp_name"], $_FILES["file_send2"]["name"]);         //Add attachments
+        }
+    }
     // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
 
     //Content

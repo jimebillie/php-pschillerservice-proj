@@ -53,8 +53,8 @@ if (!isset($_POST["name"]) || !isset($_POST['id'])) {
              * Insert to DB
              */
             try {
-                $stmt = $db->conn->prepare("UPDATE `spare_parts` SET `name`=:__name,`image`=:__image WHERE `id`=:__id");
-                $stmt->execute(["__name" => $_POST["name"], "__image" => $newName, "__id" => $_POST["id"]]);
+                $stmt = $db->conn->prepare("UPDATE `spare_parts` SET `name`=:__name,`image`=:__image, `link_for_sale`=:__link_for_sale WHERE `id`=:__id");
+                $stmt->execute(["__name" => $_POST["name"], "__image" => $newName, "__link_for_sale" => $_POST["link_for_sale"], "__id" => $_POST["id"]]);
             } catch (Exception $e) {
                 echo $e;
             }
@@ -73,8 +73,8 @@ if (!isset($_POST["name"]) || !isset($_POST['id'])) {
          * Insert to DB
          */
         try {
-            $stmt = $db->conn->prepare("UPDATE `spare_parts` SET `name`=:__name WHERE `id`=:__id");
-            $stmt->execute(["__name" => $_POST["name"],"__id" => $_POST["id"]]);
+            $stmt = $db->conn->prepare("UPDATE `spare_parts` SET `name`=:__name, `link_for_sale`=:__link_for_sale WHERE `id`=:__id");
+            $stmt->execute(["__name" => $_POST["name"], "__link_for_sale" => $_POST["link_for_sale"], "__id" => $_POST["id"]]);
         } catch (Exception $e) {
             echo $e;
         }

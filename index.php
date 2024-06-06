@@ -224,7 +224,7 @@ $db = new connect();
 
 
 				<div class="box-port-home">
-					<ul class="vmcarousel-centered-infitine">
+					<ul class="vmcarousel-centered-infitine" id="port-slide" style="opacity: 0;">
 
 						<?php
 						try {
@@ -386,21 +386,26 @@ $db = new connect();
 				infinite: false
 			});
 
-			$('.vmcarousel-centered-infitine').vmcarousel({
-				delay: 2000,
-				speed: 500,
-				autoplay: true,
-				items_to_show: 0,
-				min_items_to_show: 1,
-				items_to_slide: 1,
-				dont_cut: true,
-				centered: false,
-				start_item: 0,
-				start_item_centered: false,
-				infinite: false,
-				changed_slide: $.noop()
+			setTimeout(() => {
+				$('.vmcarousel-centered-infitine').vmcarousel({
+					delay: 2000,
+					speed: 500,
+					autoplay: true,
+					items_to_show: 0,
+					min_items_to_show: 1,
+					items_to_slide: 1,
+					dont_cut: true,
+					centered: false,
+					start_item: 0,
+					start_item_centered: false,
+					infinite: false,
+					changed_slide: $.noop()
 
-			});
+				});
+			}, 500);
+			setTimeout(() => {
+				$('#port-slide').css("opacity", "1")
+			}, 600);
 
 			$('.vmcarousel-normal').vmcarousel({
 				centered: false,

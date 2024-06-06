@@ -200,6 +200,7 @@ try {
                                 (*ไฟล์ขนาดไม่เกิน 1 mb)
                             </div>
                             <div class="form-right"><input type="file" name="file_send" class="input-01" /></div>
+                            <div class="form-right"><input type="file" name="file_send2" class="input-01" /></div>
                         </div>
                         <div class="form-list">
 
@@ -258,6 +259,7 @@ try {
             const quantity = document.querySelector("input[name='quantity']").value;
             const detail = document.querySelector("textarea[name='detail']").value;
             const file_send = document.querySelector("input[name='file_send']");
+            const file_send2 = document.querySelector("input[name='file_send2']");
 
             let formData = new FormData();
 
@@ -275,19 +277,25 @@ try {
                 if (file_send.files[0].size <= 1000000) {
                     formData.append("file_send", file_send.files[0]);
                 } else {
-                    alert("ไฟล์มีขนาดเกิน 1 mb");
+                    alert("ไฟล์ที่ 1 มีขนาดเกิน 1 mb");
                     chk_err = 1;
+                    file_send.value = "";
+                }
+            }
+            if (file_send2.files.length > 0) {
+                if (file_send2.files[0].size <= 1000000) {
+                    formData.append("file_send2", file_send2.files[0]);
+                } else {
+                    alert("ไฟล์ที่ 2 มีขนาดเกิน 1 mb");
+                    chk_err = 1;
+                    file_send2.value = "";
                 }
             }
 
             const currentUrl = window.location.href;
             const baseUrl = new URL(currentUrl).origin;
-            let apiUrl = `${baseUrl}/sys_mail/sendmail.php`;
-            if (currentUrl.includes("pschillerservice")) {
-                apiUrl = `${baseUrl}/pschillerservice/sys_mail/sendmail.php`;
-            } else {
-                apiUrl = `${baseUrl}/sys_mail/sendmail.php`;
-            }
+            apiUrl = `${baseUrl}/pschillerservice/sys_mail/sendmail.php`;
+            // apiUrl = `${baseUrl}/sys_mail/sendmail.php`;
 
 
             if (chk_err === 0) {
@@ -300,8 +308,6 @@ try {
                     alert("ส่งแบบฟอร์มขอใบเสนอราคาเรียบร้อยแล้ว");
                     window.location.reload();
                 }
-            } else {
-                file_send.value = "";
             }
 
         }
